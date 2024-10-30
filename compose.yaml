@@ -13,9 +13,10 @@ services:
     networks:
       - survaye
       - traefik
+      - mailhog
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.survaye.rule=Host(`survaye.localhost`)"
+      - 'traefik.enable=true'
+      - 'traefik.http.routers.survaye.rule=Host(`survaye.localhost`)'
   database:
     container_name: survaye-database
     image: postgres:16.4-alpine
@@ -35,4 +36,6 @@ networks:
   survaye:
     driver: bridge
   traefik:
+    external: true
+  mailhog:
     external: true

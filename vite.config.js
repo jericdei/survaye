@@ -14,7 +14,7 @@ export default defineConfig({
   server: {
     host: "0.0.0.0",
     hmr: {
-      host: "laravel-start.localhost",
+      host: "survaye.localhost",
       clientPort: import.meta.env.VITE_DEV_PORT ?? 5181,
     },
   },

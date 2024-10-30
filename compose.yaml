@@ -1,0 +1,38 @@
+services:
+  app:
+    container_name: laravel-start-app
+    build: .
+    env_file:
+      - path: .env
+        required: true
+    volumes:
+      - .:/var/www/html
+    ports:
+      - 80
+      - ${VITE_DEV_PORT:-5181}:5173
+    networks:
+      - laravel-start
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.laravel-start.rule=Host(`laravel-start.localhost`)"
+  database:
+    container_name: laravel-start-database
+    image: postgres:16.4-alpine
+    ports:
+      - 54321:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: laravel_start
+    volumes:
+      - ./.docker/database:/var/lib/postgresql/data
+    networks:
+      - laravel-start
+      - traefik
+
+networks:
+  laravel-start:
+    driver: bridge
+  traefik:
+    external: true

@@ -27,16 +27,9 @@ class ValidateController extends Controller
 
         Cache::forget($key);
 
-        $user = User::firstWhere('email', $request->validated('email'));
-
-        if ($user) {
-            throw ValidationException::withMessages([
-                'code' => 'The email address is already registered.',
-            ]);
-        }
-
-        $user = User::create([
+        $user = User::updateOrCreate([
             'email' => $request->email,
+        ], [
             'email_verified_at' => now(),
         ]);
 

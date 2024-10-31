@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ValidateController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -8,11 +8,13 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', '/auth/login');
 
 Route::prefix('auth')->as('auth.')->group(function () {
-    Route::inertia('login', 'auth/login')->name('login');
-    Route::inertia('register', 'auth/register')->name('register');
-    Route::post('register', RegisterController::class)->name('register.store');
-    Route::inertia('validate', 'auth/validate')->name('validate');
-    Route::post('validate', ValidateController::class)->name('validate.store');
+    Route::middleware('guest')->group(function () {
+        Route::inertia('login', 'auth/login')->name('login');
+        Route::post('login', LoginController::class)->name('login.store');
+        Route::inertia('validate', 'auth/validate')->name('validate');
+        Route::post('validate', ValidateController::class)->name('validate.store');
+    });
+
     Route::post('logout', function () {
         Auth::logout();
 

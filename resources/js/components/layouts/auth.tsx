@@ -5,9 +5,10 @@ import { PropsWithChildren } from 'react';
 export default function AuthLayout({
   children,
   className,
-}: PropsWithChildren<{ className?: string }>) {
+  title,
+}: PropsWithChildren<{ className?: string; title?: string }>) {
   return (
-    <MainLayout>
+    <MainLayout title={title}>
       <main className="grid h-screen w-screen place-items-center">
         <div className={cn(className)}>{children}</div>
       </main>

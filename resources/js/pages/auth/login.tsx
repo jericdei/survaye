@@ -1,7 +1,7 @@
 import AuthLayout from '@/components/layouts/auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Head, useForm } from '@inertiajs/react';
+import { useForm } from '@inertiajs/react';
 
 interface LoginSchema {
   email: string;
@@ -19,9 +19,7 @@ export default function Login() {
   };
 
   return (
-    <AuthLayout className="w-1/4 space-y-6">
-      <Head title="Login" />
-
+    <AuthLayout title="Login" className="w-1/4 space-y-6">
       <div className="space-y-4">
         <h1>Login/Sign Up</h1>
         <p>Enter your email address to continue.</p>

@@ -1,3 +1,4 @@
+import { Head } from '@inertiajs/react';
 import { PropsWithChildren } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 
@@ -9,8 +10,14 @@ function fallbackRenderer({ error }: { error: Error }) {
   );
 }
 
-export default function MainLayout({ children }: PropsWithChildren) {
+export default function MainLayout({
+  children,
+  title,
+}: PropsWithChildren<{ title?: string }>) {
   return (
-    <ErrorBoundary fallbackRender={fallbackRenderer}>{children}</ErrorBoundary>
+    <ErrorBoundary fallbackRender={fallbackRenderer}>
+      <Head title={title} />
+      {children}
+    </ErrorBoundary>
   );
 }

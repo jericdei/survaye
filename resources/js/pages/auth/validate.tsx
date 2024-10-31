@@ -2,7 +2,7 @@ import Error from '@/components/error';
 import AuthLayout from '@/components/layouts/auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Head, useForm } from '@inertiajs/react';
+import { useForm } from '@inertiajs/react';
 
 interface ValidateSchema {
   email: string;
@@ -29,12 +29,12 @@ export default function Validate() {
   };
 
   return (
-    <AuthLayout className="w-1/4 space-y-6">
-      <Head title="Validate" />
+    <AuthLayout title="Validate Email" className="w-1/4 space-y-6">
+      <h1>Validate Email Address</h1>
 
-      <h2>
+      <p>
         Enter the code sent to <u>{email}</u>
-      </h2>
+      </p>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-8">
         <label htmlFor="code">

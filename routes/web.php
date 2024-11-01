@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ValidateController;
+use App\Http\Controllers\User\UpdateProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -29,5 +30,10 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('surveys')->as('surveys.')->group(function () {
         Route::inertia('/', 'surveys/index')->name('index');
+    });
+
+    Route::prefix('profile')->as('profile.')->group(function () {
+        Route::inertia('edit', 'profile/edit')->name('edit');
+        Route::post('update', UpdateProfileController::class)->name('update');
     });
 });

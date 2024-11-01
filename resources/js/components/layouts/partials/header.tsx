@@ -55,7 +55,7 @@ export default function Header() {
           <PopoverContent align="end" sideOffset={10}>
             <div className="flex flex-col gap-8">
               <div className="flex flex-col items-center">
-                <p>{props.auth.user?.name}</p>
+                <p className="font-semibold">{props.auth.user?.name}</p>
                 <small>{props.auth.user?.email}</small>
               </div>
 

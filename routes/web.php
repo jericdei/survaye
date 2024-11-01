@@ -23,5 +23,11 @@ Route::prefix('auth')->as('auth.')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::inertia('dashboard', 'dashboard')->name('dashboard');
+    Route::prefix('dashboard')->as('dashboard.')->group(function () {
+        Route::inertia('/', 'dashboard/index')->name('index');
+    });
+
+    Route::prefix('surveys')->as('surveys.')->group(function () {
+        Route::inertia('/', 'surveys/index')->name('index');
+    });
 });

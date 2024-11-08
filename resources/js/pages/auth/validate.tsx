@@ -2,7 +2,8 @@ import Error from '@/components/error';
 import AuthLayout from '@/components/layouts/auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useForm } from '@inertiajs/react';
+import { Link, useForm } from '@inertiajs/react';
+import { useState } from 'react';
 
 interface ValidateSchema {
   email: string;
@@ -10,6 +11,8 @@ interface ValidateSchema {
 }
 
 export default function Validate() {
+  const [resent, setResent] = useState(false);
+
   const params = new URLSearchParams(window.location.search);
   const email = params.get('email');
 
@@ -48,6 +51,24 @@ export default function Validate() {
 
           <small className="text-red-700">{form.errors.code}</small>
         </label>
+
+        <div>
+          <p>
+            Didn&apos;t receive the code?{' '}
+            <Link
+              as="button"
+              className="underline"
+              method="post"
+              data={{ email, resend: true }}
+              href={route('auth.login')}
+              onSuccess={() => setResent(true)}
+            >
+              Resend
+            </Link>
+          </p>
+        </div>
+
+        {resent && <p className="text-green-400">Code resent!</p>}
 
         <Button>Continue</Button>
       </form>

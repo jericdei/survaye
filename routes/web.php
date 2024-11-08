@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ValidateController;
+use App\Http\Controllers\Survey\SurveyController;
 use App\Http\Controllers\User\UpdateProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -29,7 +30,8 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('surveys')->as('surveys.')->group(function () {
-        Route::inertia('/', 'surveys/index')->name('index');
+        Route::get('/', [SurveyController::class, 'index'])->name('index');
+        Route::get('{survey}', [SurveyController::class, 'show'])->name('show');
     });
 
     Route::prefix('profile')->as('profile.')->group(function () {

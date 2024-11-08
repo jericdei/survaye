@@ -15,6 +15,7 @@ class LoginRequest extends FormRequest
     {
         return [
             'email' => ['required', 'string', 'email', 'max:255'],
+            'resend' => ['nullable', 'boolean'],
         ];
     }
 }

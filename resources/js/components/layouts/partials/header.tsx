@@ -2,7 +2,7 @@ import { Avatar } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent } from '@/components/ui/popover';
 import { links } from '@/constants/links';
-import { cn } from '@/lib/utils';
+import { cn, getUserInitials } from '@/lib/utils';
 import { Link, router, usePage } from '@inertiajs/react';
 import { AvatarFallback } from '@radix-ui/react-avatar';
 import { PopoverTrigger } from '@radix-ui/react-popover';
@@ -47,7 +47,7 @@ export default function Header() {
           <PopoverTrigger asChild>
             <Avatar>
               <AvatarFallback className="flex aspect-square cursor-pointer items-center justify-center rounded-full bg-indigo-400 font-semibold">
-                TF
+                {getUserInitials(props.auth.user?.name || '')}
               </AvatarFallback>
             </Avatar>
           </PopoverTrigger>
